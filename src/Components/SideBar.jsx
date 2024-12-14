@@ -152,7 +152,7 @@ const SideBar = () => {
                                                 <div className="absolute z-[151] left-11 mt-1 w-40 bg-white border rounded shadow">
                                                     {FarmData && FarmData.length > 0 ? (
                                                         FarmData.map((farm, index) => (
-                                                            <button onClick={() => handleFarmClick(farm)} key={index} className="block px-4 w-full h-full py-2 text-left hover:bg-gray-100">
+                                                            <button onClick={() => {handleFarmClick(farm);setIsMenuOpen(false)}} key={index} className="block px-4 w-full h-full py-2 text-left hover:bg-gray-100">
                                                                 {farm.farmName}
                                                             </button>
                                                         ))

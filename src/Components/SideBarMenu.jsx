@@ -62,7 +62,7 @@ const SideBarMenu = () => {
           <li>
             <div className="relative inline-block text-xl" ref={dropdownRef}>
               <button onClick={() => setIsOpen(!isOpen)} className="px-4 py-2 rounded ">
-                Farms
+                View Farms
               </button>
               {isOpen && (
                 <div className="absolute z-[151] left-11 mt-1 w-40 bg-white border rounded shadow">

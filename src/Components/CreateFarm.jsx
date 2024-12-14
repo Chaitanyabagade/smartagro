@@ -144,9 +144,9 @@ const CreateFarm = () => {
                     }}
                     onClick={handleShapeClick}
                 >
-                    <div className="text-center overflow-visible">
+                    <div className="text-left  overflow-visible">
 
-                        <p>Click The Position Where You Installed The Nodes.</p>
+                        <p>Click On Farm To Add Nodes.</p>
 
                         {/* Render buttons at clicked positions */}
                         {Nodes.map((Nodes, index) => (
@@ -180,7 +180,7 @@ const CreateFarm = () => {
             >
                 <option>MNodeId</option>
             {  
-               mnodedata.map((mnode, index) => (
+              mnodedata&& mnodedata.map((mnode, index) => (
                      <option key={index}>{mnode.mnodeId}</option>
                     ))
             }

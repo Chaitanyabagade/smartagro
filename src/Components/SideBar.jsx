@@ -26,7 +26,7 @@ const SideBar = () => {
         axios.post(url, fData)
             .then((response) => {
                 const APIResponse = response.data; // This is response data from AXIOS
-                console.log(APIResponse.data);
+              
                 setFarmData(APIResponse.data);
             })
             .catch(error => alert(error, " Try Again...!"));

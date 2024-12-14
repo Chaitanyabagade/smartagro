@@ -8,14 +8,14 @@ const CreateFarm = () => {
 
     const [points, setPoints] = useState([]);
     const [Nodes, setNodes] = useState([]);
-    const [MnodeId, setMnodeId] = useState('');
+    const [MnodeId, setMnodeId] = useState(''); // this is also used for making new nodes give id to them
     const [FarmName, setFarmName] = useState('');
     const removeLastPoint = () => {
         setPoints((prevPoints) => prevPoints.slice(0, -1));
-      };
-      const removeLastNode = () => {
+    };
+    const removeLastNode = () => {
         setNodes((prevNodes) => prevNodes.slice(0, -1));
-      };
+    };
     const handleScreenTouch = (e) => {
         console.log(points);
         if (points.length >= 50) {
@@ -32,16 +32,25 @@ const CreateFarm = () => {
     };
 
     const handleShapeClick = (e) => {
-        if (Nodes.length >= 50) {
-            alert("You can only Select Maximum 50 Nodes...");
+        if (MnodeId.length <= 0) {
+            alert("Please First Select The MNodeId From the Given Select Option in Down ")
         }
         else {
-            const rect = e.target.getBoundingClientRect();
-            const newNode = {
-                x: e.clientX - rect.left,
-                y: e.clientY - rect.top,
-            };
-            setNodes((prevButtons) => [...prevButtons, newNode]);
+            if (Nodes.length >= 50) {
+                alert("You can only Select Maximum 50 Nodes...");
+            }
+            else {
+                const rect = e.target.getBoundingClientRect();
+                const mnodeIndex = mnodedata.findIndex(obj => obj.mnodeId === MnodeId);
+                const noOfNodesUsedInPast = mnodedata[mnodeIndex].noOfNodesUsed;
+
+                const newNode = {
+                    x: e.clientX - rect.left,
+                    y: e.clientY - rect.top,
+                    NodeId: MnodeId+parseInt(noOfNodesUsedInPast+Nodes.length+1),
+                };
+                setNodes((prevButtons) => [...prevButtons, newNode]);
+            }
         }
     };
 
@@ -52,7 +61,7 @@ const CreateFarm = () => {
     const resetNodes = () => setNodes([]);
 
     const convertToClipPath = (shapePoints) => {
-       // if (shapePoints.length < 4) return "none";
+        // if (shapePoints.length < 4) return "none";
         return `polygon(${shapePoints.map((point) => `${point.x}px ${point.y}px`).join(", ")})`;
     };
 
@@ -60,14 +69,15 @@ const CreateFarm = () => {
     const NodesData = () => {
         const url = `https://darkslategray-lion-860323.hostingersite.com/smart-agri/software/user/getNoOfMNodes.php`;
         let fData = new FormData();
-       
+
         fData.append('userId', Cookies.get('userId'));
 
         axios.post(url, fData)
             .then((response) => {
                 const APIResponse = response.data; // This is response data from AXIOS
                 setMnodedata(APIResponse.data);
-                
+
+
             })
             .catch(error => alert(error, " Try Again...!"));
     }
@@ -98,13 +108,14 @@ const CreateFarm = () => {
                 fData.append('FarmShape', JSON.stringify(points)); // Serialize as JSON
                 fData.append('FarmNodes', JSON.stringify(Nodes));  // Serialize as JSON
                 fData.append('userId', Cookies.get('userId'));
+                fData.append('noOfNodesUsed', Nodes.length);
 
                 axios.post(url, fData)
                     .then((response) => {
                         const APIResponse = response.data; // This is response data from AXIOS
-                        if(APIResponse.status==='success'){
+                        if (APIResponse.status === 'success') {
                             window.location.reload();
-                        } 
+                        }
                         alert(APIResponse.message)
                     })
                     .catch(error => alert(error, " Try Again...!"));
@@ -115,7 +126,7 @@ const CreateFarm = () => {
 
 
     useEffect(() => {
-           NodesData();
+        NodesData();
     }, []);
     return (
         <div className="relative w-full h-full bg-gray-100">
@@ -124,15 +135,15 @@ const CreateFarm = () => {
                 className="absolute w-full h-full bg-blue-100"
                 onClick={handleScreenTouch}
             >
-               
-                    <p className="absolute top-1 left-1 bg-white p-2 rounded shadow">
-                        Tap On Screen to create a shape.
-                    </p>
-               
+
+                <p className="absolute top-1 left-1 bg-white p-2 rounded shadow">
+                    Tap On Screen to create a shape.
+                </p>
+
             </div>
 
             {/* Render the shape if 4 points are provided */}
-            {points.length  && (
+            {points.length && (
                 <div
                     className="absolute overflow-visible bg-blue-500 flex justify-center items-center text-white font-bold"
                     style={{
@@ -146,19 +157,31 @@ const CreateFarm = () => {
                 >
                     <div className="text-left  overflow-visible">
 
-                        <p>Click On Farm To Add Nodes.</p>
+                        <p>Click On Farm To Nodes.</p>
 
-                        {/* Render buttons at clicked positions */}
-                        {Nodes.map((Nodes, index) => (
-                            <button
-                                key={index}
-                                className="absolute z-[150] bg-purple-500 text-white py-1 px-2 rounded"
-                                style={{ top: `${Nodes.y}px`, left: `${Nodes.x}px` }}
+                        {Nodes.map((node, btnIndex) => {
+                            // Find the index of the master node selected by the user
+                            const mnodeIndex = mnodedata.findIndex(obj => obj.mnodeId === MnodeId);
 
-                            >
-                                Node {index + 1}
-                            </button>
-                        ))}
+                            // Check if the master node exists
+                            if (mnodeIndex === -1) {
+                                console.error(`Master Node ID "${MnodeId}" not found in mnodedata.`);
+                                return null; // Skip rendering this button
+                            }
+
+                            const noOfNodesUsedInPast = mnodedata[mnodeIndex].noOfNodesUsed;
+
+                            return (
+                                <button
+                                    key={btnIndex} // Use btnIndex as the key since it is unique
+                                    className="absolute z-[150] bg-purple-500 text-white py-1 px-2 rounded"
+                                    style={{ top: `${node.y}px`, left: `${node.x}px` }}
+                                >
+                                    NodeId{MnodeId}{noOfNodesUsedInPast + btnIndex + 1}
+                                </button>
+                            );
+                        })}
+
                     </div>
                 </div>
             )}
@@ -175,15 +198,15 @@ const CreateFarm = () => {
             {/* Master Node Select For Farm */}
             <select
                 value={MnodeId}
-                onChange={(e) => setMnodeId(e.target.value)}
+                onChange={(e) => { Nodes.length ? alert("If You want to change the Master Node. Then Firstly Click On Reset Nodes...") : setMnodeId(e.target.value) }}
                 className="absolute bottom-[55px] right-[255px] bg-white text-black py-2 px-4 rounded shadow"
             >
                 <option>MNodeId</option>
-            {  
-              mnodedata&& mnodedata.map((mnode, index) => (
-                     <option key={index}>{mnode.mnodeId}</option>
+                {
+                    mnodedata && mnodedata.map((mnode, index) => (
+                        <option key={index}>{mnode.mnodeId}</option>
                     ))
-            }
+                }
             </select>
 
             {/* Farm Name input */}
@@ -203,22 +226,22 @@ const CreateFarm = () => {
 
                 Create
             </button>
-             {/* Remove latest points*/}
-             <button
+            {/* Remove latest points*/}
+            <button
                 onClick={removeLastPoint}
                 className="absolute bottom-2 left-[145px] text-white py-1 px-1 rounded shadow"
             >
-           <img className="w-[30px] h-[30px]" src={reload}alt="Undo"></img>
-                
+                <img className="w-[30px] h-[30px]" src={reload} alt="Undo"></img>
+
             </button>
 
-           
-              {/* Remove latest Node*/}
-              <button
+
+            {/* Remove latest Node*/}
+            <button
                 onClick={removeLastNode}
                 className="absolute bottom-2 right-[145px] text-white py-1 px-1 rounded shadow"
             >
-           <img className="w-[30px] h-[30px]" src={reload}alt="Undo"></img>
+                <img className="w-[30px] h-[30px]" src={reload} alt="Undo"></img>
             </button>
             {/* Reset Nodes */}
             <button

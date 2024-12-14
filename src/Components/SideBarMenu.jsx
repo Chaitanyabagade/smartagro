@@ -19,7 +19,7 @@ const SideBarMenu = () => {
     axios.post(url, fData)
       .then((response) => {
         const APIResponse = response.data; // This is response data from AXIOS
-        console.log(APIResponse.data);
+       
         setFarmData(APIResponse.data);
       })
       .catch(error => alert(error, " Try Again...!"));
@@ -28,7 +28,7 @@ const SideBarMenu = () => {
 
   const handleFarmClick = (farm) => {
     navigate('/ViewFarm', { state: { farm } }); // Passing farm data via state
-    console.log("Navigating")
+   
   };
 
   useEffect(() => {

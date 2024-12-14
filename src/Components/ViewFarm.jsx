@@ -86,13 +86,13 @@ const ViewFarm = () => {
 
                 <div className="text-center">
                     {JSON.parse(farm.farmNodes) && JSON.parse(farm.farmNodes).map((Nodes, index) => (
-                        <button onClick={()=>{setNodeIdToShowPopUp(index+1);setIsPopUp(!isPopUp)}}
+                        <button onClick={()=>{setNodeIdToShowPopUp(Nodes.NodeId);setIsPopUp(!isPopUp)}}
                             key={index} 
                             className="absolute z-[150] bg-purple-500 text-white py-1 px-2 rounded"
                             style={{ top: `${Nodes.y}px`, left: `${Nodes.x}px` }}
 
                         >
-                            Node {index + 1}
+                            N=> {Nodes.NodeId}
                         </button>
                     ))
                     }

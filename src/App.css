@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*{
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
+}
+.no-scrollbar {
+  scrollbar-width: 0px; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and other WebKit browsers */
+}

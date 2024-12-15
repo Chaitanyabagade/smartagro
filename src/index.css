@@ -22,3 +22,10 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.text-stroke {
+  color: transparent; /* Makes the text transparent */
+  -webkit-background-clip: text; /* Clips the background to the text */
+  background-image: linear-gradient(to right, black, black); /* Creates the border effect */
+  text-shadow: 1px 1px 2px black, 0 0 2px black, 0 0 10px darkgray; /* Creates the "border" effect around text */
+}

@@ -20,7 +20,7 @@ const SideBar = () => {
         const url = `${process.env.REACT_APP_domain}/smart-agri/software/user/getFarmData.php`;
         let fData = new FormData();
 
-        fData.append('FarmId', '');
+        fData.append('FarmId', '');   // send empty then it returns all farms data else it gives only data of give farm id
         fData.append('userId', Cookies.get('userId'));
 
         axios.post(url, fData)

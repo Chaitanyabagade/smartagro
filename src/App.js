@@ -13,7 +13,7 @@ import Contact from './Components/Contact';
 import Blog from './Components/Blog';
 import SideBar from './Components/SideBar';
 import SideBarMenu from './Components/SideBarMenu';
-import Dashboard from './Components/Dashboard';
+import Hpannel from './Components/Hpannel';
 function App() {
   const [loged, setLoged] = useState(0);
   useEffect(() => {
@@ -43,7 +43,7 @@ function App() {
           : <>
             <SideBar />
             <SideBarMenu />
-            <Dashboard></Dashboard>
+            <Hpannel/>   {/** It contain all routes of loged in user */}
           
           </>
         }

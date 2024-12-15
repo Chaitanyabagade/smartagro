@@ -41,7 +41,6 @@ const SideBar = () => {
         getFarmData();
 
 
-
         const handleClickOutside = (event) => {
             if (navbarRef.current && !navbarRef.current.contains(event.target)) {
                 setIsMenuOpen(false);
@@ -137,7 +136,7 @@ const SideBar = () => {
                             <hr /><hr /><hr /><hr />
                             {/************* SideBarMenuCodeForSmallDevices ************* */}
                             <div className="p-2">
-                                <ul className="mt-1 space-y-6">
+                                <ul className="mt-1 space-y-6 w-full">
                                     <li>
                                         <a href="/" className="block  px-2 text-lg hover:bg-gray-100 rounded-md">
                                             Dashboard
@@ -149,10 +148,11 @@ const SideBar = () => {
                                                View Farms
                                             </button>
                                             {isOpen && (
-                                                <div className="absolute z-[151] left-11 mt-1 w-40 bg-white border rounded shadow">
+                                                <div className="absolute z-[151] left-11  w-40 bg-white border rounded shadow">
+                                                    <button  onClick={()=>{setIsOpen(false)}} className="text-right  bg-purple-300 text-xl text-red-700 px-2 font-bold w-full h-fit"> X </button>
                                                     {FarmData && FarmData.length > 0 ? (
                                                         FarmData.map((farm, index) => (
-                                                            <button onClick={() => {handleFarmClick(farm);setIsMenuOpen(false)}} key={index} className="block px-4 w-full h-full py-2 text-left hover:bg-gray-100">
+                                                            <button onClick={() => {handleFarmClick(farm);setIsMenuOpen(false);setIsOpen(false)}} key={index} className="block px-4 w-full h-full py-2 text-left hover:bg-gray-100">
                                                                 {farm.farmName}
                                                             </button>
                                                         ))

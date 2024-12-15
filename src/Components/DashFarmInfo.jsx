@@ -35,11 +35,10 @@ function DashFarmInfo({ props }) {
 
 
     useEffect(() => {
-        /* eslint-disable react-hooks/exhaustive-deps */
         getAllNodesData();
-/* eslint-enable react-hooks/exhaustive-deps */
-       
-    },[]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    
     return (
         <div className="bg-white border-2  border-green-600 p-2 h-fit max-h-[300px] overflow-y-scroll min-h-[300px] shadow-md rounded-lg">
             <p className="text-center text-3xl font-bold text-green-600 text-stroke">Farm Name <b className='text-orange-600'>{props.farmName}</b>  </p>

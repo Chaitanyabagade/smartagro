@@ -3,7 +3,7 @@ import logo from "../assets/logo.png"; // Replace with your logo path
 
 const Footer = () => {
   return (
-    <footer className="bg-pink-600 text-white py-12">
+    <footer className="bg-purple-500 text-white py-12">
       <div className="container mx-auto px-6 flex flex-col lg:flex-row justify-between items-center">
         {/* Left Section: Logo */}
         <div className="mb-8 lg:mb-0 flex justify-center lg:justify-start">

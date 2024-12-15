@@ -70,7 +70,7 @@ const Home = () => {
       </section>
 
       {/* Call to Action Section */}
-      <section className="bg-green-600 text-white py-20 text-center">
+      <section className="bg-green-500 text-white py-20 text-center">
         <h2 className="text-3xl sm:text-4xl font-bold mb-6">Ready to Revolutionize Your Farm?</h2>
         <p className="text-lg sm:text-xl mb-6">
           Join the future of agriculture. Our technology will help you optimize productivity, reduce waste, and increase profitability.

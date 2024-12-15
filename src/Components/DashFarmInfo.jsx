@@ -4,12 +4,12 @@ import axios from 'axios';
 
 function DashFarmInfo({ props }) {
     
-    const noOfNodes=JSON.parse(props.farmNodes).length;
+  //  const noOfNodes=JSON.parse(props.farmNodes).length;
     const [AllNodesData, setAllNodesData] = useState([]);
-    const getAllNodesData = async() => {
+    const getAllNodesData =() => {
         const url = `${process.env.REACT_APP_domain}/smart-agri/software/user/getFarmAllNodesData.php`;
         let fData = new FormData();
-
+        
         const farmNodes = JSON.parse(props.farmNodes);
         let firstNodeId = farmNodes[0].NodeId; // 'aac24
         firstNodeId = 'Node' + firstNodeId.substring(3); // 'Node24'
@@ -25,7 +25,7 @@ function DashFarmInfo({ props }) {
             .then((response) => {
                 const APIResponse = response.data; // This is response data from AXIOS
             
-               
+               console.log(AllNodesData);
                 setAllNodesData(APIResponse.data);
                
             })
@@ -36,12 +36,10 @@ function DashFarmInfo({ props }) {
 
     useEffect(() => {
         getAllNodesData();
-    }, []);
+    });
     return (
         <div className="bg-white border-2  border-green-600 p-2 h-fit max-h-[300px] overflow-y-scroll min-h-[300px] shadow-md rounded-lg">
             <p className="text-center text-3xl font-bold text-green-600 text-stroke">Farm Name <b className='text-orange-600'>{props.farmName}</b>  </p>
-           
-
         </div>
 
     )

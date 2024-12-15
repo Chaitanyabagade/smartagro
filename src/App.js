@@ -36,6 +36,9 @@ function App() {
               <Route path="/Blogs" element={<Blog></Blog>} />
             </Routes>
             <Footer />
+
+
+            
           </>
           : <>
             <SideBar />

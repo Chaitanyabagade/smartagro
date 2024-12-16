@@ -19,7 +19,7 @@ const Dashboard = () => {
                 setSpinner(0);
                 setFarmData(APIResponse.data);
             })
-            .catch(error => alert(error, " Try Again...!"),setSpinner(0));
+            .catch(error => alert(error, " Try Again...!"), setSpinner(0));
     }
 
     useEffect(() => {
@@ -36,17 +36,23 @@ const Dashboard = () => {
                 <span className="sr-only">Loading...</span>
             </div>
 
-            <div className="grid text-green-50 grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 pb-5">
-                {FarmData && FarmData.length && (
-                    FarmData.map((farm, index) => (
-                        <DashFarmInfo key={index} props={farm} />
-                    ))
-                )}
-            </div>
-        </div>
-    )
+
+            {FarmData && FarmData.length ? (
+                <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 pb-5">
+                  { FarmData.map((farm, index) => (
+                    <DashFarmInfo key={index} props={farm} />
+                    ))}
+                </div>
+                    )
+               
+                    :
+                    <div className='w-fit h-fit mt-[250px] text-3xl  p-5 md:p-8 lg:p-10  rounded-xl text-black font-semibold mx-auto my-auto bg-green-500 '>No Farm Data Available</div>
+            }
+
+                </div>
+            )
 }
 
-export default Dashboard
+            export default Dashboard
 
 

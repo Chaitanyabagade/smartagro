@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import topviewoffarm from '../assets/topviewoffarm.jpg'
 import axios from "axios";
 import reload from "../assets/reload.png"
+import { toast } from "react-toastify";
 const CreateFarm = () => {
 
     const [points, setPoints] = useState([]);
@@ -33,11 +34,11 @@ const CreateFarm = () => {
 
     const handleShapeClick = (e) => {
         if (MnodeId.length <= 0) {
-            alert("Please First Select The MNodeId From the Given Select Option in Down ")
+            toast("Please First Select The MNodeId From the Given Select Option in Down ")
         }
         else {
             if (Nodes.length >= 50) {
-                alert("You can only Select Maximum 50 Nodes...");
+                toast("You can only Select Maximum 50 Nodes...");
             }
             else {
                 const rect = e.target.getBoundingClientRect();
@@ -79,25 +80,25 @@ const CreateFarm = () => {
 
 
             })
-            .catch(error => alert(error, " Try Again...!"));
+            .catch(error => toast.error(error, " Try Again...!"));
     }
 
 
     const SaveFarm = () => {
         if (points.length < 4) {
-            alert("First Make The Design Of the Farm and Add Nodes");
+            toast.warning("First Make The Design Of the Farm and Add Nodes");
         }
         else if (Nodes.length < 1) {
-            alert("Add at least one Node");
+            toast.warning("Add at least one Node");
         }
         else if (MnodeId.length === 0) {
-            alert("Select the Master Node Id...");
+            toast.warning("Select the Master Node Id...");
         }
         else if (MnodeId === 'MNodeId') {
-            alert("Select the Master Node Id...");
+            toast.warning("Select the Master Node Id...");
         }
         else if (FarmName.length === 0) {
-            alert("Enter the Farm Name ...");
+            toast.warning("Enter the Farm Name ...");
         }
         else {
             if (window.confirm(`Confirm To Save The Farm ${FarmName} With Master NodeId ${MnodeId}`)) {
@@ -116,9 +117,9 @@ const CreateFarm = () => {
                         if (APIResponse.status === 'success') {
                             window.location.reload();
                         }
-                        alert(APIResponse.message)
+                        toast.success(APIResponse.message)
                     })
-                    .catch(error => alert(error, " Try Again...!"));
+                    .catch(error => toast.warning(error, " Try Again...!"));
             }
         }
 

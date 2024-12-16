@@ -3,6 +3,7 @@ import loginimg from "../assets/DigitalAgrri.jpg"
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 const Login = () => {
   const navigate = useNavigate();
   const [spinner, setSpinner] = useState(0);
@@ -10,10 +11,10 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const handleSubmit = () => {
     if (email.length === 0) {
-      alert("Email Id is left");
+      toast.warning("Email Id is left");
     }
     else if (password.length === 0) {
-      alert("Password is left");
+      toast.warning("Password is left");
     }
     else {
       setSpinner(1);
@@ -31,15 +32,19 @@ const Login = () => {
           Cookies.set('firstName', APIResponse.firstName, { expires: 30 });
           Cookies.set('lastName', APIResponse.lastName, { expires: 30 });
           Cookies.set('noOfMNodes', APIResponse.noOfMNodes, { expires: 30 });
-          navigate('/');
-          window.location.reload();
+          toast.success("Login Successful...");
+          setTimeout(() => {
+            navigate('/');
+            window.location.reload();
+         }, 100); 
+         
         }
         else {
-          alert(APIResponse.message);
+          toast.warning(APIResponse.message);
         }
         setSpinner(0);
 
-      }).catch(error => { alert(error, " Try Again...!"); setSpinner(0); });
+      }).catch(error => { toast.error(error, " Try Again...!"); setSpinner(0); });
     }
   }
 

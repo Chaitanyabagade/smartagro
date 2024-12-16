@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import loginimg from '../assets/iotbgimg.jpg'
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 const Signup = () => {
   const [otpSended, setOtpSended] = useState(0);
   const [resend, setResend] = useState(0);
-  const [sucess, setSucess] = useState(false);
-  const [response, setResponse] = useState([]);
   const [spinner, setSpinner] = useState(0);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -38,35 +39,35 @@ const Signup = () => {
         setOtpSended(true);
         setResend(true);
         setSpinner(0);
-      }).catch(error => alert(error, " Try Again...!"));
+      }).catch(error => toast.error(error, " Try Again...!"));
 
     } else {
-      alert('Please Enter Your Email Id first.');
+      toast.warning('Please Enter Your Email Id first.');
     }
   };
 
 
   function handleSubmit() {
     if (formData.firstName.length === 0) {
-      alert("First Name is left");
+      toast.warning("First Name is left");
     }
     else if (formData.lastName.length === 0) {
-      alert("Last Name is left");
+      toast.warning("Last Name is left");
     }
     else if (formData.email.length === 0) {
-      alert("Email is left");
+      toast.warning("Email is left");
     }
     else if (formData.mobile.length === 0) {
-      alert("Mobile Number is left");
+      toast.warning("Mobile Number is left");
     }
     else if (!otpSended) {
-      alert("Click Button Send OTP...");
+      toast.warning("Click Button Send OTP...");
     }
     else if (formData.otp.length === 0) {
-      alert("OTP Is left ");
+      toast.warning("OTP Is left ");
     }
     else if (formData.password.length === 0) {
-      alert("Password is left");
+      toast.warning("Password is left");
     }
     else {
       setSpinner(1);
@@ -81,10 +82,20 @@ const Signup = () => {
 
       axios.post(url2, fData).then((response) => {
         const APIResponse = response.data;// This is response data from AXIOS
-        setResponse(APIResponse);
+       
         setSpinner(0);
-        setSucess(true);
-      }).catch(error => alert(error, " Try Again...!"));
+        if(APIResponse.status==='success'){
+        
+           toast.success(APIResponse.message);
+           setTimeout(() => {
+             navigate('/Login');
+          }, 2000); 
+        }
+        else{
+          toast.error(APIResponse.message);
+        }
+       
+      }).catch(error => toast.warning(error, " Try Again...!"));
 
     }
   }
@@ -191,7 +202,7 @@ const Signup = () => {
           >
             {resend ? 'Re-Send' : 'Send OTP'}
           </button>
-          <div > {sucess ? <p className={`${response.status_code === 200 ? 'text-green-700' : 'text-red-700'}`}>{response.message}</p> : otpSended ? <p className="text-green-700 text-center">OTP Send Sucessfully</p> : ''}</div>
+        
         </div>
 
         {otpSent && (

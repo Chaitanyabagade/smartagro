@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import reloadimg from '../assets/reload.png'
+import { toast } from 'react-toastify';
 const ViewFarm = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -39,8 +40,9 @@ const ViewFarm = () => {
                 const APIResponse = response.data; // This is response data from AXIOS
                 console.log((JSON.parse(APIResponse.data[0][NodeId])))
                 setNodeData(JSON.parse(APIResponse.data[0][NodeId]));
+               
             })
-            .catch(error => alert(error, " Try Again...!"));
+            .catch(error => toast.error(error, " Try Again...!"));
 
 
     };
@@ -130,7 +132,7 @@ const ViewFarm = () => {
             {/**  Open Sensor Dialog when clicked to the buttons */}
             <div ref={popUpRef} className={`${isPopUp ? 'block' : 'hidden'} rounded-xl border-2 border-blue-600 popup w-[90%] p-2 h-[80%] sm:w-[90%] sm:h-[80%] md:w-[70%] md:h-[80%]  lg:w-[60%] lg:h-[70%] m-[5%] sm:m-[5%] md:m-[5%] md:ml-[10%] bg-white  fixed z-[10]`}>
                 <div className="nav flex justify-between">
-                    <button className="reload" onClick={()=>{getNodeData(nodeIdToShowPopUp)}}><img className='w-[30px] h-[30px]  ' src={reloadimg}alt="reload"/></button>
+                    <button className="reload" onClick={()=>{getNodeData(nodeIdToShowPopUp);toast.success("Data Fetched Success...")}}><img className='w-[30px] h-[30px]  ' src={reloadimg}alt="reload"/></button>
                     <p className='text-3xl text-green-600 text-center font-bold'>Node id=>{nodeIdToShowPopUp}</p>
                     <button className="close bg-red-600 text-white font-bold w-fit p-1 px-2 rounded-md" onClick={()=>setIsPopUp(false)}>Close</button>
                 </div>

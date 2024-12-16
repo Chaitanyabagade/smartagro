@@ -123,7 +123,9 @@ const SideBar = () => {
                 </div> : <>
                     {isMenuOpen &&
                         <div ref={profileRef} class="fixed top-[75px] right-5 z-[100] pb-[80px] rounded-lg bg-white text-black border-2 border-gray-300  w-[300px] max-h-[80vh] h-fit overflow-y-scroll p-4 shadow-lg">
-                            <h1 className="font-semibold text-xl"> {Cookies.get('firstName')} {Cookies.get('lastName')} </h1>
+                          <div className="flex">
+                           <img className="w-[40px] h-[40px] m-2" src={profileimg} alt="img"/> <h1 className="font-semibold text-xl m-3"> {Cookies.get('firstName')} {Cookies.get('lastName')} </h1>
+                           </div>
                             <h2 className="py-2">{Cookies.get('email')}</h2>
                             <hr /> <hr /><hr /><hr />
                             <p className="p-2 font-semibold">No.Of Master Nodes => {Cookies.get('noOfMNodes') || 0}</p>

@@ -34,6 +34,7 @@ const CreateFarm = () => {
 
     const handleShapeClick = (e) => {
         if (MnodeId.length <= 0) {
+
             toast("Please First Select The MNodeId From the Given Select Option in Down ")
         }
         else {
@@ -44,13 +45,17 @@ const CreateFarm = () => {
                 const rect = e.target.getBoundingClientRect();
                 const mnodeIndex = mnodedata.findIndex(obj => obj.mnodeId === MnodeId);
                 const noOfNodesUsedInPast = mnodedata[mnodeIndex].noOfNodesUsed;
-
-                const newNode = {
-                    x: e.clientX - rect.left,
-                    y: e.clientY - rect.top,
-                    NodeId: MnodeId+parseInt(noOfNodesUsedInPast+Nodes.length+1),
-                };
-                setNodes((prevButtons) => [...prevButtons, newNode]);
+                if (noOfNodesUsedInPast+Nodes.length < 50) {
+                    const newNode = {
+                        x: e.clientX - rect.left,
+                        y: e.clientY - rect.top,
+                        NodeId: MnodeId + parseInt(noOfNodesUsedInPast + Nodes.length + 1),
+                    };
+                    setNodes((prevButtons) => [...prevButtons, newNode]);
+                }
+                else{
+                    toast.warning("You Can Not Use the More that 50 nodes for 1 Master Node, Please Select Another Master NodeId");
+                }
             }
         }
     };
@@ -175,10 +180,10 @@ const CreateFarm = () => {
                             return (
                                 <button
                                     key={btnIndex} // Use btnIndex as the key since it is unique
-                                    className="absolute z-[150] bg-purple-500 text-white py-1 px-2 rounded"
-                                    style={{ top: `${node.y}px`, left: `${node.x}px` }}
+                                    className="absolute z-[150]  bg-purple-500 text-white w-[40px]  h-[40px] text-xl rounded-full "
+                                    style={{ top: `${node.y - 12}px`, left: `${node.x - 15}px` }}
                                 >
-                                    NodeId{MnodeId}{noOfNodesUsedInPast + btnIndex + 1}
+                                    {noOfNodesUsedInPast + btnIndex + 1}
                                 </button>
                             );
                         })}

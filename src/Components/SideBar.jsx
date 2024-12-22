@@ -140,9 +140,9 @@ const SideBar = () => {
                             <div className="p-2">
                                 <ul className="mt-1 space-y-6 w-full">
                                     <li>
-                                        <a href="/" className="block  px-2 text-lg hover:bg-gray-100 rounded-md">
+                                        <Link to="/" className="block  px-2 text-lg hover:bg-gray-100 rounded-md">
                                             Dashboard
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
                                         <div className="relative inline-block" ref={dropdownRef}>

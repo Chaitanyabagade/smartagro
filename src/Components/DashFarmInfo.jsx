@@ -175,12 +175,12 @@ function DashFarmInfo({ props }) {
             </p>
             <div className="controllers text-2xl w-full h-fit grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 gap-4 pb-5 mt-[20px] ">
                 {/* Add the Motor Controller logic */}
-                <div className='  bg-blue-100 p-2 border-blue-500 border-2 rounded-xl'>
+                <div className='  bg-white p-2 border-blue-500 border-2 rounded-xl'>
                     <b className='p-2 mt-4 h-[100px]'>Pump Status : {controllData.PumpOn ? <b className='text-green-600'>ON</b> : <b className='text-red-600'>OFF</b>} </b> <br />
                     <b className='p-2 mt-4 h-[100px]'>Pump Auto   : {controllData.AutoPumpOn ? <b className='text-green-600'>ON</b> : <b className='text-red-600'>OFF</b>} </b>
 
                 </div>
-                <div className='  bg-blue-100 border-blue-500 border-2 rounded-xl'>
+                <div className='  bg-white border-blue-500 border-2 rounded-xl'>
                     <div className="flex">
                         <div className="flex items-center gap-3 px-2 py-1">
                             <div className="name font-bold w-[180px]">Pump ON/OFF  :</div>
@@ -227,7 +227,7 @@ function DashFarmInfo({ props }) {
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 gap-4 pb-5 mt-[10px]">
                 {/* Sensor 1 Air Temprature */}
                 <div className='bg-white border-blue-600 border-2 h-[200px] rounded-lg p-0'>
-                    <div className="flex h-full flex-col items-center space-y-2 p-2 bg-blue-50 rounded-lg shadow-lg">
+                    <div className="flex h-full flex-col items-center space-y-2 p-2 bg-white rounded-lg shadow-lg">
                         <div className="sensorNa3me text-3xl font-bold text-gray-800">Air Temprature</div>
                         {/* Temperature Numeric Display */}
                         <div className="text-2xl font-bold text-gray-800">
@@ -258,7 +258,7 @@ function DashFarmInfo({ props }) {
                 </div>
                 {/* Sensor 2 Soild Temprature */}
                 <div className='bg-white border-blue-600 border-2 h-[200px] rounded-lg '>
-                    <div className="flex h-full flex-col items-center space-y-2 p-2 bg-blue-50 rounded-lg shadow-lg">
+                    <div className="flex h-full flex-col items-center space-y-2 p-2 bg-white rounded-lg shadow-lg">
                         <div className="sensorNa3me text-3xl font-bold text-gray-800">Soil Temprature</div>
                         {/* Temperature Numeric Display */}
                         <div className="text-2xl font-bold text-gray-800">
@@ -289,7 +289,7 @@ function DashFarmInfo({ props }) {
                 </div>
                 {/* Sensor 3 Humidity */}
                 <div className='bg-white border-blue-600 border-2 h-[200px] rounded-lg '>
-                    <div className="flex h-full flex-col items-center space-y-2 p-2 bg-blue-50 rounded-lg shadow-lg">
+                    <div className="flex h-full flex-col items-center space-y-2 p-2 bg-white rounded-lg shadow-lg">
                         <div className="sensorNa3me text-3xl font-bold text-gray-800">Air Humidity</div>
                         {/* Temperature Numeric Display */}
                         <div className="text-2xl font-bold text-gray-800">
@@ -321,7 +321,7 @@ function DashFarmInfo({ props }) {
 
                 {/* Sensor 4 Soil Moisture */}
                 <div className='bg-white border-blue-600 border-2 h-[200px] rounded-lg '>
-                    <div className="flex h-full flex-col items-center space-y-2 p-2 bg-blue-50 rounded-lg shadow-lg">
+                    <div className="flex h-full flex-col items-center space-y-2 p-2 bg-white rounded-lg shadow-lg">
                         <div className="sensorNa3me text-3xl font-bold text-gray-800">Soil Moisture</div>
                         {/* Temperature Numeric Display */}
                         <div className="text-2xl font-bold text-gray-800">

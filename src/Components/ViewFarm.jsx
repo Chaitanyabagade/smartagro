@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import reloadimg from '../assets/reload.png'
 import { toast } from 'react-toastify';
 const ViewFarm = () => {
- 
+
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -40,9 +40,9 @@ const ViewFarm = () => {
     axios.post(url, fData)
       .then((response) => {
         const APIResponse = response.data; // This is response data from AXIOS
-        console.log((JSON.parse(APIResponse.data[0][NodeId])))
+     
         setNodeData(JSON.parse(APIResponse.data[0][NodeId]));
-
+        setIsPopUp(!isPopUp);
       })
       .catch(error => toast.error(error, " Try Again...!"));
 
@@ -57,8 +57,6 @@ const ViewFarm = () => {
 
     };
     document.addEventListener("mousedown", handleClickOutside);
-
-
 
   }, [])
 
@@ -117,7 +115,7 @@ const ViewFarm = () => {
 
         <div className="text-center">
           {JSON.parse(farm.farmNodes) && JSON.parse(farm.farmNodes).map((Nodes, index) => (
-            <button onClick={() => { setNodeIdToShowPopUp(Nodes.NodeId); setIsPopUp(!isPopUp); getNodeData(Nodes.NodeId); }}
+            <button onClick={() => { setNodeIdToShowPopUp(Nodes.NodeId);  getNodeData(Nodes.NodeId); }}
               key={index}
               className="absolute z-[150] bg-purple-500 text-white py-1 px-2 rounded"
               style={{ top: `${Nodes.y}px`, left: `${Nodes.x}px` }}
@@ -243,7 +241,7 @@ const ViewFarm = () => {
 
               {/* Optional: Add a weather icon */}
               <div className="text-5xl text-yellow-500">
-               {nodeData.sensor3 > 40 ? " 🌧️" : "🌁"}
+                {nodeData.sensor3 > 40 ? " 🌧️" : "🌁"}
               </div>
             </div>
           </div>
@@ -264,7 +262,7 @@ const ViewFarm = () => {
                   <div
                     className="h-full rounded-full"
                     style={{
-                      width: `${nodeData.sensor4 }%`,
+                      width: `${nodeData.sensor4}%`,
                       background: `linear-gradient(to right, #3b82f6, #f97316, #ef4444)`,
                     }}
                   ></div>
@@ -275,7 +273,7 @@ const ViewFarm = () => {
 
               {/* Optional: Add a weather icon */}
               <div className="text-5xl text-yellow-500">
-                
+
                 🌱
               </div>
             </div>

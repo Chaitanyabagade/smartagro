@@ -160,7 +160,7 @@ function DashFarmInfo({ props }) {
 
     }, [props.farmId, props.mnodeId]);
     return (
-        <div className="bg-white border-2 border-green-600 p-2 h-fit max-h-[640px] overflow-y-scroll min-h-[300px] shadow-md rounded-lg">
+        <div className="bg-white border-2 border-green-600 p-2 h-fit max-h-[640px] overflow-y-scroll md:overflow-y-hidden min-h-[300px] shadow-md rounded-lg">
             {/* Loading Spinner */}
             <div role="status" className={`${spinner ? "block" : "hidden"} absolute inset-0 flex lg:ml-[15%] items-center justify-center`}>
                 <svg aria-hidden="true" className="w-[100px] h-[100px] text-gray-200 animate-spin dark:text-gray-600 fill-blue-900" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">

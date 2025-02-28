@@ -44,7 +44,7 @@ const ViewFarm = () => {
 
         setNodeData(JSON.parse(APIResponse.data[0][NodeId]));
         setSpinner(0);
-        setIsPopUp(!isPopUp);
+        setIsPopUp(1);
       })
       .catch(error => toast.error(error, " Try Again...!"),setSpinner(0));
 

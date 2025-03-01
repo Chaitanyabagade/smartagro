@@ -15,7 +15,7 @@ function DashFarmInfo({ props }) {
 
     const [AllNodesData, setAllNodesData] = useState([]); // Data of all nodes in this farm
 
-
+  
     useEffect(() => {
         const getAllNodesData = () => {
             setSpinner(1);
@@ -40,6 +40,7 @@ function DashFarmInfo({ props }) {
                     const APIResponse = response.data;
                     if (APIResponse && Array.isArray(APIResponse.data)) {
                         setAllNodesData(APIResponse.data);
+                        
 
                     } else {
                         console.error("Invalid API response format:", APIResponse);
@@ -48,7 +49,9 @@ function DashFarmInfo({ props }) {
                 })
                 .catch((error) => { toast.error(error.message, " Try Again...!"); setSpinner(1) });
         };
+       
         getAllNodesData();
+       
     }, [props.farmNodes, props.mnodeId]); // Fetch data on component mount
 
     const calculateAverages = useCallback(() => {

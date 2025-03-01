@@ -5,6 +5,7 @@ import topviewoffarm from '../assets/topviewoffarm.jpg'
 import axios from "axios";
 import reload from "../assets/reload.png"
 import { toast } from "react-toastify";
+import chartbg from '../assets/chartbg.jpg'
 const CreateFarm = () => {
 
     const [points, setPoints] = useState([]);
@@ -135,10 +136,11 @@ const CreateFarm = () => {
         NodesData();
     }, []);
     return (
-        <div className="relative w-full h-full bg-gray-100">
+        <div className="relative w-full h-full  ">
             {/* Clickable Map Area */}
             <div
-                className="absolute w-full h-full bg-blue-100"
+                style={{ backgroundImage: `url(${chartbg})`}}
+                className="absolute w-full h-full  "
                 onClick={handleScreenTouch}
             >
 
